@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>s生命周期旧</title>
+    <script src="./js/babel.min.js"></script>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+</head>
+
+<body>
+    <div id="test"></div>
+    <script type="text/babel">
+        class Count extends React.Component {
+            state={sum:0};
+            add=()=>{
+                let temp=this.state.sum+1;
+                this.setState({sum:temp});
+            }
+            render() {
+                return (
+                    <div>
+                        <div id="res">点击求和后的结果为{this.state.sum}</div>
+                        <br/>
+                        <button id='btn' onClick={this.add}>点击+1</button>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<Count/>,document.getElementById('test'));
+    </script>
+</body>
+
+</html>

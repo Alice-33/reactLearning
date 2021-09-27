@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react 学习</title>
+    <script src="js/babel.min.js"></script>
+    <!-- 全局多了React对象 -->
+    <script src="js/react.development.js"></script>
+    <!-- 全局多了ReactDOM对象 -->
+    <script src="js/react-dom.development.js"></script>
+    <!-- 用于对标签属性进行限制，全局多了PropType对象 -->
+    <script src="js/prop-types.js"></script>
+</head>
+
+<body>
+    <div id="test"></div>
+    <script type='text/babel'>
+        class Demo extends React.Component {
+            // 先将状态初始化
+            state = {
+                username: '',
+                password: ''
+            }
+            mySubmit = () => {
+                event.preventDefault();
+                const { username, password } = this.state;
+                alert(`用户名：${username},密码：${password}`);
+            }
+            saveName = () => {
+                // 将随时获得的这个输入值存入到状态里面
+                this.setState({ username: event.target.value });
+            }
+            savePassWord = () => {
+                // 将随时获得的这个输入值存入到状态里面
+                this.setState({ password: event.target.value });
+            }
+            // saveFormData = (dataType) => {
+            //     return (
+            //         (event) => {
+            //             // 这个dataType要写[]否则会出错！！
+            //             this.setState({ [dataType]: event.target.value });
+            //         }
+            //     )
+            // }
+            saveFormData = (dataType, event) => {
+                // 这个dataType要写[]否则会出错！！
+                this.setState({ [dataType]:event.target.value });
+            }
+            render() {
+                return (
+                    // action是表单要提交的地址,想要在url中显示的话，对应的需要写name
+                    <form action='http://www.baidu.com' onSubmit={this.mySubmit}>
+                        {/*执行下面的时候，把ref当前所在的节点，也就是input直接存储在该节点里面*/}
+                        用户名：<input onChange={(event)=>{this.saveFormData('username',event)}} type="text" name="username" id="" />&nbsp;
+                        密码：<input onChange={(event)=>{this.saveFormData('password',event)}} type="password" name='password' />&nbsp;
+                        <button onClick={this.btnClick}>点击登陆</button>
+                    </form>
+                )
+            }
+        }
+        ReactDOM.render(<Demo />, document.getElementById('test'));
+    </script>
+</body>
+
+</html>

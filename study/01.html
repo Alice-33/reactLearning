@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react 学习</title>
+    <script src="js/babel.min.js"></script>
+    <!-- 全局多了React对象 -->
+    <script src="js/react.development.js"></script>
+    <!-- 全局多了ReactDOM对象 -->
+    <script src="js/react-dom.development.js"></script>
+    <!-- 用于对标签属性进行限制，全局多了PropType对象 -->
+    <script src="js/prop-types.js"></script>
+</head>
+
+<body>
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <script type='text/babel'>
+        class Person extends React.Component {
+            constructor(props){
+                super();
+            }
+            // 对标签属性进行类型、必要性的限制
+            static propTypes = {
+                // name是必传
+                name: PropTypes.string.isRequired,
+                // sex不传有默认值，见下面
+                sex: PropTypes.string,
+                age: PropTypes.number
+
+            }
+            // 指定默认的标签
+            static defaultProps = {
+                sex: '男'
+            }
+            // 初始化
+            state = { isHot: false };
+            // 自定义方法，都要写成赋值语句＋箭头函数的方法
+            render() {
+                const { age, name, sex } = this.props;
+                return (
+                    <ul>
+                        <li>姓名：{name}</li>
+                        <li>性别：{sex}</li>
+                        <li>年龄：{age}</li>
+                    </ul>
+                )
+            }
+        }
+
+        const p = { name: 'Alice', age: 18, sex: '女' };
+        // ReactDOM.render(<Person name={p.name} age={p.age} sex={p.sex}/>, document.getElementById('test1'))
+        ReactDOM.render(<Person {...p} />, document.getElementById('test1'))
+        ReactDOM.render(<Person name='Tom' age={23} />, document.getElementById('test2'))
+
+    </script>
+</body>
+
+</html>
