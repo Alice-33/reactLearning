@@ -15,22 +15,53 @@
     <div id="test"></div>
     <script type="text/babel">
         class Count extends React.Component {
-            state={sum:0};
-            add=()=>{
-                let temp=this.state.sum+1;
-                this.setState({sum:temp});
+            state = { sum: 0 };
+            add = () => {
+                let temp = this.state.sum + 1;
+                this.setState({ sum: temp });
             }
             render() {
                 return (
                     <div>
                         <div id="res">点击求和后的结果为{this.state.sum}</div>
-                        <br/>
+                        <br />
                         <button id='btn' onClick={this.add}>点击+1</button>
                     </div>
                 )
             }
         }
-        ReactDOM.render(<Count/>,document.getElementById('test'));
+
+        class A extends React.Component {
+            state = { carName: 'jeep' }
+            changeCar = () => {
+                this.setState({ carName: 'mini' })
+            }
+            render() {
+                return (
+                    <div>
+                        <div>A组件</div>
+                        <br />
+                        <button onClick={this.changeCar}>换车</button>
+                        <br />
+                        <br />
+                        <B carName={this.state.carName} />
+                    </div>
+                )
+            }
+        }
+        class B extends React.Component {
+            componentWillReceiveProps(props) {
+                console.log('change',props);
+            }
+            render() {
+                return (
+                    <div>
+                        <div>B组件,我平时开的车是{this.props.carName}</div>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<A />, document.getElementById('test'));
     </script>
 </body>
 
