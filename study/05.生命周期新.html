@@ -1,18 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="./js/babel.min.js"></script>
-    <script src="./js/react.development.js"></script>
-    <script src="./js/react-dom.development.js"></script>
+    <title>s生命周期新</title>
+    <script src="./js/17.0.1/babel.min.js"></script>
+    <script src="./js/17.0.1/react.development.js"></script>
+    <script src="./js/17.0.1/react-dom.development.js"></script>
 </head>
+
 <body>
     <div id="test"></div>
     <script type="text/babel">
-        
+        class Count extends React.Component {
+            state = { sum: 0 };
+            add = () => {
+                let temp = this.state.sum + 1;
+                this.setState({ sum: temp });
+            }
+            static getDerivedStateFromProps(){
+                console.log('getDerivedStateFromProps');
+                return null;
+            }
+            getSnapshotBeforeUpdate(){
+                console.log('getSnapshotBeforeUpdate');
+                return '双一流B';
+            }
+            // 可以接受两个参数
+            componentDidUpdate(preProps,preState,snapshotValue){
+                console.log('componentDidUpdate',preProps,preState,snapshotValue);
+            }
+            render() {
+                return (
+                    <div>
+                        <div id="res">点击求和后的结果为{this.state.sum}</div>
+                        <br />
+                        <button id='btn' onClick={this.add}>点击+1</button>
+                    </div>
+                )
+            }
+        }
+
+        class A extends React.Component {
+            state = { carName: 'jeep' }
+            changeCar = () => {
+                this.setState({ carName: 'mini' })
+            }
+            render() {
+                return (
+                    <div>
+                        <div>A组件</div>
+                        <br />
+                        <button onClick={this.changeCar}>换车</button>
+                        <br />
+                        <br />
+                        <B carName={this.state.carName} />
+                    </div>
+                )
+            }
+        }
+        class B extends React.Component {
+            componentWillReceiveProps(props) {
+                console.log('change',props);
+            }
+            render() {
+                return (
+                    <div>
+                        <div>B组件,我平时开的车是{this.props.carName}</div>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<Count count={199}/>, document.getElementById('test'));
     </script>
 </body>
+
 </html>
