@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>s生命周期新</title>
+    <script src="./js/17.0.1/babel.min.js"></script>
+    <script src="./js/17.0.1/react.development.js"></script>
+    <script src="./js/17.0.1/react-dom.development.js"></script>
+</head>
+
+<body>
+    <div id="test"></div>
+    <script type="text/babel">
+        class Count extends React.Component {
+            state = { time: new Date() };
+            
+            componentDidMount() {
+               setInterval(() => {
+                   this.setState({time:new Date()})
+               }, 1000);
+            }
+            render() {
+                return (
+                    <div>
+                        <input type="text"/>&nbsp;
+                        <span id="res">现在的时间是{this.state.time.toTimeString()}</span>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<Count />, document.getElementById('test'));
+    </script>
+</body>
+
+</html>
