@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
-import About from './pages/About';
-import Home from './pages/Home';
+import About from './component/About';
+import Home from './component/Home';
 
 export default class App extends Component {
 
