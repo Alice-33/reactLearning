@@ -10,7 +10,7 @@ export default class Detail extends Component {
         console.log(this.props)
         const {id,title}=this.props.match.params;
         const findRes=data.find((item)=>{
-            return item.id==id;
+            return item.id===id;
         })
         return (
             <div>
