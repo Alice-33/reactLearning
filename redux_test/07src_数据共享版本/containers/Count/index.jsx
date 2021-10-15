@@ -7,9 +7,9 @@
 // 引入connect用于连接UI组件与redux
 import { connect } from 'react-redux';
 import {
-    increment,
-    decrement,
-    incrementAsync
+    createIncrementAction,
+    createDecrementAction,
+    createIncrementAsyncAction
 } from '../../redux/actions/count';
 import React, { Component } from 'react'
 
@@ -20,20 +20,20 @@ class Count extends Component {
     increment = () => {
         let { value } = this.selectNum;
         // 通知redux加value
-        this.props.increment(value * 1);
+        this.props.jia(value * 1);
     }
     decrement = () => {
         let { value } = this.selectNum;
-        this.props.decrement(value * 1);
+        this.props.jian(value * 1);
     }
     incrementOdd = () => {
         let { value } = this.selectNum;
-        if (this.props.count % 2 === 1) this.props.increment(value * 1);
+        if (this.props.count % 2 === 1) this.props.jia(value * 1);
     }
     // 异步加，点击加之后不能立刻马上加，这里模拟一下
     incrementAsync = () => {
         let { value } = this.selectNum;
-        this.props.incrementAsync(value * 1, 500);
+        this.props.jiaAsync(value * 1, 500);
         // setTimeout(() => {
         // }, 1000);
     }
@@ -63,15 +63,12 @@ class Count extends Component {
 // 这样跟ui建立起了联系,暴露一个Count的容器组件
 // connect在第一次调用的时候要传入两个参数，且必须是函数
 export default connect(
-    (state) => ({ 
-        count: state.count ,
-        people:state.persons
-    }),
+    (state) => ({ count: state.sum ,people:state.people}),
     // mapDispatchToProps简写,只要提供action，react-redux可以自动的进行分发
     {
-        increment,
-        decrement,
-        incrementAsync,
+        jia: createIncrementAction,
+        jian: createDecrementAction,
+        jiaAsync: createIncrementAsyncAction,
     }
 )(Count);
 

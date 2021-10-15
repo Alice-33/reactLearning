@@ -1,24 +1,38 @@
+/*
+    容器组件,借助react-redux
+*/
+// // 引入Count的UI组件
+// import CountUI from '../../components/Count'
+
+// 引入connect用于连接UI组件与redux
+import { connect } from 'react-redux';
+import {
+    createIncrementAction,
+    createDecrementAction,
+    createIncrementAsyncAction
+} from '../../redux/count_action';
 import React, { Component } from 'react'
 
-export default class Count extends Component {
+// 定义UI组件
+class Count extends Component {
 
     increment = () => {
         let { value } = this.selectNum;
         // 通知redux加value
-        this.props.jia(value*1);
+        this.props.jia(value * 1);
     }
     decrement = () => {
         let { value } = this.selectNum;
-        this.props.jian(value*1);
+        this.props.jian(value * 1);
     }
     incrementOdd = () => {
         let { value } = this.selectNum;
-        this.props.jia(value*1);
+        if (this.props.count % 2 === 1) this.props.jia(value * 1);
     }
     // 异步加，点击加之后不能立刻马上加，这里模拟一下
     incrementAsync = () => {
         let { value } = this.selectNum;
-        this.props.jiaAsync(value*1,500);
+        this.props.jiaAsync(value * 1, 500);
         // setTimeout(() => {
         // }, 1000);
     }
@@ -41,3 +55,23 @@ export default class Count extends Component {
         )
     }
 }
+
+// 这样跟ui建立起了联系,暴露一个Count的容器组件
+// connect在第一次调用的时候要传入两个参数，且必须是函数
+export default connect(
+    (state) => ({ count: state }),
+    // (dispath) => ({
+    //     jia: (data) => dispath(createIncrementAction(data)),
+    //     jiaAsync: (data, time) => dispath(createIncrementAsyncAction(data, time)),
+    //     jian: (data) => dispath(createDecrementAction(data))
+    // })
+
+    // mapDispatchToProps简写,只要提供action，react-redux可以自动的进行分发
+    {
+        jia:createIncrementAction,
+        jian:createDecrementAction,
+        jiaAsync:createIncrementAsyncAction,
+    }
+)(Count);
+
+
