@@ -1,0 +1,10 @@
+.parent{
+    background-color: skyblue;
+    padding: 10px;
+    width: 350px;
+}
+.child{
+    background-color:palegoldenrod;
+    padding: 10px;
+    width: 100%;
+}
