@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Demo from './components/6_optimize';
+import Demo from './components/8_Errorboundary/Parent';
 
 export default class App extends Component {
     render() {

@@ -210,25 +210,25 @@
 
 ### 如何向组件内部动态传入带内容的结构(标签)?
 
-	Vue中: 
-		使用slot技术, 也就是通过组件标签体传入结构  <A><B/></A>
-	React中:
-		使用children props: 通过组件标签体传入结构
-		使用render props: 通过组件标签属性传入结构,而且可以携带数据，一般用render函数属性
+Vue中: 
+	使用slot技术, 也就是通过组件标签体传入结构  <A><B/></A>
+React中:
+	使用children props: 通过组件标签体传入结构
+	使用render props: 通过组件标签属性传入结构,而且可以携带数据，一般用render函数属性
 
 ### children props
 
-	<A>
-	  <B>xxxx</B>
-	</A>
-	{this.props.children}
-	问题: 如果B组件需要A组件内的数据, ==> 做不到 
+<A>
+	<B>xxxx</B>
+</A>
+{this.props.children}
+问题: 如果B组件需要A组件内的数据, ==> 做不到 
 
 ### render props
 
-	<A render={(data) => <C data={data}></C>}></A>
-	A组件: {this.props.render(内部state数据)}
-	C组件: 读取A组件传入的数据显示 {this.props.data} 
+<A render={(data) => <C data={data}></C>}></A>
+A组件: {this.props.render(内部state数据)}
+C组件: 读取A组件传入的数据显示 {this.props.data} 
 
 
 
@@ -274,19 +274,19 @@ componentDidCatch(error, info) {
 
 #### 几种通信方式：
 
-		1.props：
-			(1)children props
-			(2)render props
-		2.消息订阅-发布：
-			pubs-sub、event等等
-		3.集中式管理：
-			redux、dva等等
-		4.conText:
-			生产者-消费者模式
+1.props：
+	(1)children props
+	(2)render props
+2.消息订阅-发布：
+	pubs-sub、event等等
+3.集中式管理：
+	redux、dva等等
+4.conText:
+	生产者-消费者模式
 
 #### 比较好的搭配方式：
-		父子组件：props
-		兄弟组件：消息订阅-发布、集中式管理
-		祖孙组件(跨级组件)：消息订阅-发布、集中式管理、conText(开发用的少，封装插件用的多)
+父子组件：props
+兄弟组件：消息订阅-发布、集中式管理
+祖孙组件(跨级组件)：消息订阅-发布、集中式管理、conText(开发用的少，封装插件用的多)
 
 
