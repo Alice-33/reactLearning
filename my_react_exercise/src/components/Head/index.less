@@ -1,29 +1,15 @@
 .head-container{
-    width: 100%;
-    height: 50px;
-    position: relative;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4) ;
-    .head-title{
-        border:none;
-        background-color: white;
-        height: 50px;
-    }
-    .head-right{
-        position: absolute;
-        width:200px;
-        top:50%;
-        transform: translateY(-50%);
-        right:100px;
-        .head-spin{
-            position: absolute;
-            top:5px;
-            left:-22px;
-        }
-    }
-    .head-share{
-        position: absolute;
-        top:50%;
-        transform: translateY(-50%);
-        right:10px;
-    }
+   width: 100%;
+   height: 40px;
+   background-color:skyblue;
+   display: flex;
+   .head-email{
+        width: 50px;
+   }
+   .head-title{
+       flex-grow: 1;
+   }
+   .head-menu{
+        width: 50px;
+   }
 }

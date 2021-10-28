@@ -1,47 +1,20 @@
-import React, { Component } from 'react';
-import { Route, withRouter } from "react-router-dom";
-import FirstPage from '../FirstPage';
-// 引入antdUI
-import { Input, Spin, Button,message } from 'antd';
-import { ShareAltOutlined } from '@ant-design/icons';
+import React, { Component } from 'react'
+import { Route, withRouter } from 'react-router'
+import Talking from '../Talking'
 import './index.css'
-
-const { Search } = Input;
 class Head extends Component {
-    state = {
-        loading: false
-    }
-    goFistPage = () => {
-        this.props.history.push('/firstpage')
-    }
-    onSearch = () => {
-        this.setState({ loading: true });
-        setTimeout(() => {
-            this.setState({ loading: false });
-            alert('网络有误，请稍后再试')
-        }, 3000);
-    }
-    share = () => {
-        message.success('分享成功');
-        setTimeout(() => {
-            message.success('感谢分享');
-        }, 1000);
+    goFirst=()=>{
+        this.props.history.push('./talking')
     }
     render() {
         return (
             <div className='head-container'>
-                <h2  ><button className='head-title' onClick={this.goFistPage}>10/27日练习</button></h2>
-                <Route path='/firstpage' component={FirstPage} />
-                <div className='head-right'>
-                    <Search placeholder="input search text" onSearch={this.onSearch} />
-                    <Spin className='head-spin' spinning={this.state.loading} size="middle" />
-                </div>
-                <Button className='head-share' type="primary" onClick={this.share}>
-                    分享<ShareAltOutlined />
-                </Button>
+                <button className='head-email'>邮箱</button>
+                <button className='head-title' onClick={this.goFirst}>react学习首页</button>
+                <Route path='./talking' component={Talking}/>
+                <button className='head-menu'>菜单</button>
             </div>
-        );
+        )
     }
 }
-
-export default withRouter(Head);;
+export default withRouter(Head);
