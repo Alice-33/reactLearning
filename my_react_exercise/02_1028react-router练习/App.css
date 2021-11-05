@@ -1,0 +1,8 @@
+.app-container{
+    width: 340px;
+    height: 500px;
+    margin: 10px 0 0 20px;
+    /* background-color: skyblue; */
+    border: 1px solid black;
+    position: relative;
+}
