@@ -1,11 +1,12 @@
-import { ADD_PERSON } from '../constant'
-let initState = '';
-export default function personReducer(preState = initState, action) {
-    let { type, data } = action;
-    console.log('person',type,data)
+import { ADD_PERSON } from '../contanst';
+
+const initState = [];
+export default function personReducer(preState = initState, actions) {
+    let { type, data } = actions;
+    console.log(preState,data);
     switch (type) {
         case ADD_PERSON:
-            return [data,...preState];
+            return [data, ...preState];
         default:
             return preState;
     }

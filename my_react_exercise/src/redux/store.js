@@ -1,10 +1,7 @@
-import {createStore,applyMiddleware,combineReducers} from 'redux';
-import countReducer from '../redux/reducers/count';
-import personReducer from '../redux/reducers/person'
+// 就是创建一个——有点全忘了
+// 这个是要把reducer暴露出去
+import {createStore,applyMiddleware} from 'redux'
+import allReducers from './reducers/index'
 import thunk from 'redux-thunk'
 
-const allReducers=combineReducers({
-    sum:countReducer,
-    people:personReducer
-})
-export default createStore(allReducers,applyMiddleware(thunk));
+export default  createStore(allReducers,applyMiddleware(thunk));

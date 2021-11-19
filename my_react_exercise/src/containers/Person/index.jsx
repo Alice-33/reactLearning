@@ -1,35 +1,36 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import { createAddPersonAction } from '../../redux/actions/person'
-
+import { connect } from 'react-redux'
+import { addPerson } from '../../redux/action/person'
 class Person extends Component {
     addPerson = () => {
-        let newPerson = this.nameNode.value;
-        console.log('person', newPerson)
-        this.props.addPerson(newPerson);
+        let { value } = this.personNode;
+        this.props.addPerson(value);
     }
     render() {
-        console.log('this.props是什么',this.props)
-        let { people } = this.props;
+        let { peopleArr, result } = this.props;
+        console.log('people', this.props);
         return (
-            <div>
-                名字：<input ref={c => this.nameNode = c} type="text" name="" id="" />
-                <button onClick={this.addPerson}>添加人员</button>
-                <h3>当前求和为：{this.props.sum}</h3>
+            <div style={{ width: '400px', backgroundColor: 'skyblue' }}>
+                姓名：<input ref={c => this.personNode = c} type="text" name="" id="" />
+                <button onClick={this.addPerson}>点击添加人员</button>
+                <h3>小组成员姓名：</h3>
                 {
-                    people.length > 0 ?
-                        (people.map((item, index) => {
-                            return <li key={index}>{item}</li>
-                        })) : ''
+                    peopleArr.length>0?peopleArr.map((item,index)=>{
+                        return <li key={index}>{index}----{item}</li>
+                    }):''
                 }
+                <h3>小组平均成绩：{result}</h3>
             </div>
         )
     }
 }
 
 export default connect(
-    (state) => ({ people: state.people ,sum:state.sum}),
+    (state) => ({
+        result: state.count,
+        peopleArr: state.person
+    }),
     {
-        addPerson: createAddPersonAction
+        addPerson
     }
 )(Person)
