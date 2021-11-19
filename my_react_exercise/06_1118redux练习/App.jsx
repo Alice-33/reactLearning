@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
-import Count from './containers/Count'
-import Person from './containers/Person'
+import Count from './components/Count'
 
 export default class App extends Component {
   render() {
     return (
       <div>
         <h2>11/18</h2>
-        <Count/>
-        <br />
-        <Person/>
+        <Count />
       </div>
     )
   }
