@@ -6,7 +6,7 @@ export default class App extends Component{
     render(){
         return(
             <div>
-               <h2>11/25</h2>
+               <h2> Hello,redux</h2>
                <Count/>
                <hr/>
                <Person/>

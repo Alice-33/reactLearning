@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import { increment, decrement } from '../../redux/actions/count';
-import {connect} from 'react-redux';
 
 class Count extends Component {
     increment = () => {
@@ -12,16 +12,17 @@ class Count extends Component {
     render() {
         return (
             <div>
-                <h3>当前的结果是：{this.props.result}</h3>
-                <button onClick={this.increment}>点击+1</button>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button onClick={this.decrement}>点击-1</button>
+                <h2>结果：{this.props.score}</h2>
+                <button onClick={this.increment}>+1</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button onClick={this.decrement}>-1</button>
             </div>
         )
     }
 }
+
 export default connect(
-    (state)=>({result:state.result}),
+    (state) => ({ score: state.score }),
     {
         increment,
         decrement

@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import {addPerson} from '../../redux/actions/person';
-import {connect} from 'react-redux';
+import store from '../../redux/store';
 
-class Person extends Component {
+export default class Person extends Component {
     addPerson=()=>{
         if(this.input.value==='')return;
-        this.props.addPerson(this.input.value);
+        store.dispatch(addPerson(this.input.value));
         this.input.value='';
     }
     render() {
-        let {result,personArr}=this.props;
+        console.log(store.getState())
+        let {result,personArr}=store.getState();
         return (
             <div>
                 姓名：<input ref={c=>this.input=c}/>
@@ -26,10 +27,3 @@ class Person extends Component {
         )
     }
 }
-
-export default connect(
-    (state)=>({result:state.result,personArr:state.personArr}),
-    {
-        addPerson
-    }
-)(Person);
